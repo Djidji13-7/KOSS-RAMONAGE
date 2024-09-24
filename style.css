@@ -235,7 +235,7 @@ body {
 }
 
 .begin p {
-  font-size: 1.5rem; /* Taille de police pour le texte */
+  font-size: 2rem; /* Taille de police pour le texte */
   color: yellow; /* Couleur crème pour le texte */
   margin: 0; /* Pas de marge */
 }
