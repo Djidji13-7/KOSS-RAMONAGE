@@ -251,7 +251,7 @@ body {
   /*animation: clignotant 1s infinite alternate, mouvement 3s infinite;  Ajouter l'animation */
 }
 
-/* Animation de clignotement */
+/* Animation de clignotement 
 @keyframes clignotant {
   0% {
     opacity: 1;
@@ -262,9 +262,9 @@ body {
   100% {
     opacity: 1;
   }
-}
+} */
 
-/* Animation de mouvement */
+/* Animation de mouvement 
 @keyframes mouvement {
   0% {
     transform: translateX(0);
@@ -275,7 +275,7 @@ body {
   100% {
     transform: translateX(0);
   }
-}
+}*/
 
 .prese p {
   font-size: 1.2rem; /* Ajuster la taille de police pour le texte de présentation */
