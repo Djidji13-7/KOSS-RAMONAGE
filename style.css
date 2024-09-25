@@ -248,7 +248,7 @@ body {
   color: #ffcc00; /* Couleur jaune clair pour le texte */
   margin-top: 20px; /* Espace en haut */
   margin-bottom: 10px; /* Espace en bas */
-  animation: clignotant 1s infinite alternate, mouvement 3s infinite; /* Ajouter l'animation */
+  /*animation: clignotant 1s infinite alternate, mouvement 3s infinite;  Ajouter l'animation */
 }
 
 /* Animation de clignotement */
