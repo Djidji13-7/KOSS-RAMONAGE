@@ -1091,8 +1091,8 @@ input[type="submit"]:hover {
 }
 
 /*DJIDJI*/
-.droit {
-  margin-top: 90px;
+.creation{
+  margin-top: 70px;
     text-align: center; /* Centrer le texte */
     padding: 10px 0; /* Ajouter un peu d'espace autour */
     background-color: pink;/* Couleur de fond du pied de page */
@@ -1100,7 +1100,7 @@ input[type="submit"]:hover {
     font-size: 14px; /* Taille de la police */
 }
 
-.droit a {
+.creation a {
     color:deeppink; /* Couleur de lien (par exemple, un rouge tomate) */
     text-decoration: none; /* Supprimer la sous-ligne */
     font-weight: bold; /* Mettre en gras */
@@ -1108,7 +1108,7 @@ input[type="submit"]:hover {
     font-size: 16px;
 }
 
-.droit a:hover {
+.creation a:hover {
     color: #ffd700; /* Couleur au survol */
     text-decoration: underline; /* Souligner au survol */
 }
