@@ -215,7 +215,11 @@ body {
   max-width: 1200px; /* Largeur maximale */
   margin-top: 150px; /* Marge supérieure */
 }
-
+@media (max-width:400px){
+  .begin{
+    max-width: 320px;
+  }
+}
 .begin-site {
   max-width: 800px; /* Largeur maximale pour le texte */
   margin: 0 auto; /* Centrer le contenu */
@@ -505,7 +509,11 @@ h5 {
   margin-bottom: 150px;
   width: 88%;
 }
-
+@media (max-width:400px){
+  .tarif-section{
+    max-width: 320px;
+  }
+}
 /* Titre et description */
 .tarif-description h5 {
   color: #ff7f50;
@@ -618,7 +626,6 @@ h5 {
 /* /////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
 /* Styles pour le formulaire */
-
 .section-form {
   max-width: 900px;
 
@@ -632,15 +639,57 @@ h5 {
   margin-top: 200px;
   margin-bottom: 150px;
 }
+@media (max-width:400px){
+  .section-form{
+    max-width: 320px;
+  }
+}
 .section-form form {
   display: grid;
-  grid-template-areas: "familyname familyname name name"
-    "Pname Pname Pname Pname" "adresse adresse adresse adresse"
-    "datetime datetime datetime datetime"
-    "des des des des" "email email email email" "num num submit submit";
+  grid-template-areas: 
+    "familyname familyname name name"
+    "Pname Pname Pname Pname"
+    "adresse adresse adresse adresse"
+    "datetime-label datetime datetime datetime"
+    "des des des des"
+    "email email email email"
+    "num num submit submit";
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 8px;
 }
+
+.date-label {
+  padding: 0;
+  grid-area: datetime-label; /* Positionne le label */
+  align-self: center; /* Centre verticalement */
+}
+
+#datetime {
+  grid-area: datetime;
+}
+
+#familyname {
+  grid-area: familyname;
+}
+#name {
+  grid-area: name;
+}
+#Pname {
+  grid-area: Pname;
+}
+#num {
+  grid-area: num;
+}
+#adresse {
+  grid-area: adresse;
+}
+#des {
+  grid-area: des;
+}
+#mail {
+  grid-area: email;
+}
+
 .section-form h1 {
   color: darkred;
   padding-bottom: 1rem;
@@ -692,30 +741,8 @@ h5 {
   height: 55px;
   resize: none;
 }
-#familyname {
-  grid-area: familyname;
-}
-#name {
-  grid-area: name;
-}
-#Pname {
-  grid-area: Pname;
-}
-#num {
-  grid-area: num;
-}
-#adresse {
-  grid-area: adresse;
-}
-#des {
-  grid-area: des;
-}
-#mail {
-  grid-area: email;
-}
-#datetime{
-  grid-area: datetime;
-}
+
+
 input[type="submit"] {
   background-color: darkred;
   border: none;
@@ -739,6 +766,17 @@ input[type="submit"]:hover {
 .section-form a:hover {
   text-decoration: underline;
 }
+.section-form label {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  display: block;
+  padding: 0;
+}
+
+
+
+
+
 /* /////////////////////////////////////////////////////////////////////////////////////////// */
 
 /* Style pour la boîte CONTACTEZ NOUS */
@@ -754,6 +792,11 @@ input[type="submit"]:hover {
   margin-bottom: 150px;
   width: 88%;
   box-shadow: 0 0 8px 8px darkred;
+}
+@media (max-width:400px){
+  .contact{
+    max-width: 320px;
+  }
 }
 /* Style pour le conteneur central */
 .contact-center {
@@ -808,6 +851,11 @@ input[type="submit"]:hover {
   padding: 20px;
   width: 88%;
 }
+@media (max-width:400px){
+  .section.temoignages{
+    max-width: 320px;
+  }
+}
 .section.temoignages h2 {
   color: darkred;
   font-size: 32px;
@@ -845,6 +893,11 @@ input[type="submit"]:hover {
   padding: 20px;
   width: 88%;
 }
+@media (max-width:400px){
+  .section.certification{
+    max-width: 320px;
+  }
+}
 .section.certifications h2 {
   font-size: 32px;
   margin-bottom: 30px;
@@ -873,6 +926,11 @@ input[type="submit"]:hover {
   padding: 50px 0;
   text-align: center;
   box-shadow: 0 0 8px 8px darkred;
+}
+@media (max-width:400px){
+  .section.avant-apres{
+    max-width: 320px;
+  }
 }
 .section.avant-apres h2 {
   color: #333;
@@ -915,6 +973,11 @@ input[type="submit"]:hover {
   padding: 20px;
   width: 88%;
 }
+@media (max-width:400px){
+  .section.localisation{
+    max-width: 320px;
+  }
+}
 .section.localisation h2 {
   color: #8b0000;
   font-size: 32px;
@@ -945,6 +1008,11 @@ input[type="submit"]:hover {
   margin-bottom: 150px;
   padding: 20px;
   width: 88%;
+}
+@media (max-width:400px){
+  .section.faq{
+    max-width: 320px;
+  }
 }
 .section.faq h2 {
   text-align: center;
