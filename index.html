@@ -297,8 +297,10 @@
             <option value="Ramonage et entretien chaudière à granulés - 230 €">Ramonage et entretien chaudière à granulés - 230 €</option>
         </select>
 
-            <label for="datetime" class="date-label">Choisissez la date :</label>
-            <input type="datetime-local" id="datetime" name="datetime">
+               <label for="datetime">Choisissez un créneau :</label>
+            <select id="datetime" name="datetime" required>
+            <!-- Les options seront générées dynamiquement par JavaScript -->
+        </select>
 
 
             <input type="text" name="num" placeholder="Numéro de téléphone" id="num" class="contact-inputs" required>
@@ -461,7 +463,7 @@
 
 
 <!-- //////////////////////////////////////////////////////////////////////////////////////-->
-<script type="text/javascript" src="./script.js"></script>
+<script type="module" src="./script.js"></script>
 
 
 
