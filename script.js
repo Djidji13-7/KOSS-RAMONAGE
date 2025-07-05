@@ -43,7 +43,7 @@ const creneaux = [
 ];
 
 // Période future à couvrir (en mois)
-const moisFuturs = 5;
+const moisFuturs = 4;
 
 // Fonction pour charger et afficher les créneaux disponibles
 async function chargerCreneaux() {
@@ -71,7 +71,7 @@ async function chargerCreneaux() {
 
   // Période d'exclusion : du 14 juillet au 18 août 2025
   const exclusionDebut = new Date("2025-07-14");
-  const exclusionFin = new Date("2025-08-18");
+  const exclusionFin = new Date("2025-08-19");
 
   for (let d = new Date(aujourdHui); d <= dateFin; d.setDate(d.getDate() + 1)) {
     if (d >= exclusionDebut && d <= exclusionFin) continue;
