@@ -43,7 +43,7 @@ const creneaux = [
 ];
 
 // Période future à couvrir (en mois)
-const moisFuturs = 2;
+const moisFuturs = 5;
 
 // Fonction pour charger et afficher les créneaux disponibles
 async function chargerCreneaux() {
@@ -55,61 +55,60 @@ async function chargerCreneaux() {
     // Récupérer les créneaux réservés depuis Firebase
     const snapshot = await getDocs(collection(db, "reservations"));
     snapshot.forEach(doc => {
-      const { jour, periode } = doc.data();
-      if (!reservations[jour]) {
-        reservations[jour] = { matin: 0, "après-midi": 0 };
+      const { date, periode } = doc.data();
+      if (!reservations[date]) {
+        reservations[date] = { matin: 0, "après-midi": 0 };
       }
-      reservations[jour][periode] = (reservations[jour][periode] || 0) + 1;
+      reservations[date][periode] = (reservations[date][periode] || 0) + 1;
     });
   } catch (error) {
     console.error("Erreur lors du chargement des réservations :", error);
   }
 
-  // Générer les créneaux futurs
   const aujourdHui = new Date();
-  for (let mois = 0; mois < moisFuturs; mois++) {
-    const dateDebutMois = new Date(
-      aujourdHui.getFullYear(),
-      aujourdHui.getMonth() + mois,
-      1
-    );
+  const dateFin = new Date();
+  dateFin.setMonth(aujourdHui.getMonth() + moisFuturs);
 
-    while (dateDebutMois.getMonth() === aujourdHui.getMonth() + mois) {
-      creneaux.forEach(creneau => {
-        const jourIndex = [
-          "dimanche",
-          "lundi",
-          "mardi",
-          "mercredi",
-          "jeudi",
-          "vendredi",
-          "samedi"
-        ].indexOf(creneau.jour);
+  // Période d'exclusion : du 14 juillet au 18 août 2025
+  const exclusionDebut = new Date("2025-07-14");
+  const exclusionFin = new Date("2025-08-18");
 
-        if (dateDebutMois.getDay() === jourIndex) {
-          const jour = creneau.jour;
-          const periode = creneau.periode;
+  for (let d = new Date(aujourdHui); d <= dateFin; d.setDate(d.getDate() + 1)) {
+    if (d >= exclusionDebut && d <= exclusionFin) continue;
 
-          if (
-            !reservations[jour] ||
-            reservations[jour][periode] < 2 // Max 2 réservations par période
-          ) {
-            const optionValue = `${jour}_${periode}_${dateDebutMois
-              .toISOString()
-              .slice(0, 10)}`;
-            const optionText = `${jour} ${dateDebutMois.toLocaleDateString(
-              "fr-FR"
-            )} (${periode})`;
-            const option = document.createElement("option");
-            option.value = optionValue;
-            option.textContent = optionText;
-            select.appendChild(option);
+    const nomJour = [
+      "dimanche",
+      "lundi",
+      "mardi",
+      "mercredi",
+      "jeudi",
+      "vendredi",
+      "samedi"
+    ][d.getDay()];
+
+    const dateStr = d.toISOString().slice(0, 10);
+
+    creneaux.forEach(creneau => {
+      if (creneau.jour === nomJour) {
+        const periode = creneau.periode;
+
+        if (!reservations[dateStr] || reservations[dateStr][periode] < 2) {
+          if (!reservations[dateStr]) {
+            reservations[dateStr] = { matin: 0, "après-midi": 0 };
           }
-        }
-      });
 
-      dateDebutMois.setDate(dateDebutMois.getDate() + 1);
-    }
+          const optionValue = `${nomJour}_${periode}_${dateStr}`;
+          const optionText = `${nomJour} ${d.toLocaleDateString(
+            "fr-FR"
+          )} (${periode})`;
+
+          const option = document.createElement("option");
+          option.value = optionValue;
+          option.textContent = optionText;
+          select.appendChild(option);
+        }
+      }
+    });
   }
 }
 
@@ -127,28 +126,26 @@ async function reserverCreneau(event) {
   const [jour, periode, date] = datetime.split("_");
 
   try {
-    // Vérifier si le créneau est déjà réservé avant de l'ajouter
     const snapshot = await getDocs(collection(db, "reservations"));
     const reservations = {};
     snapshot.forEach(doc => {
       const data = doc.data();
-      if (!reservations[data.jour]) {
-        reservations[data.jour] = { matin: 0, "après-midi": 0 };
+      if (!reservations[data.date]) {
+        reservations[data.date] = { matin: 0, "après-midi": 0 };
       }
-      reservations[data.jour][data.periode] =
-        (reservations[data.jour][data.periode] || 0) + 1;
+      reservations[data.date][data.periode] =
+        (reservations[data.date][data.periode] || 0) + 1;
     });
 
-    if (reservations[jour] && reservations[jour][periode] >= 2) {
+    if (reservations[date] && reservations[date][periode] >= 2) {
       alert("Désolé, ce créneau est déjà complet.");
-      chargerCreneaux(); // Mettre à jour les options disponibles
+      chargerCreneaux();
       return;
     }
 
-    // Ajouter la réservation dans Firebase
     await addDoc(collection(db, "reservations"), { jour, periode, date });
     alert("Réservation confirmée !");
-    chargerCreneaux(); // Recharger les créneaux disponibles
+    chargerCreneaux();
   } catch (error) {
     console.error("Erreur lors de la réservation :", error);
     alert("Une erreur est survenue. Veuillez réessayer.");
